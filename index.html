@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday! ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .title {
+        font-family: "Dancing Script", cursive;
+        font-size: 4rem;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 2s ease;
+      }
+
+      .heart-container {
+        position: relative;
+        height: 200px;
+        margin: 30px 0;
+      }
+
+      .heart {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: #ff4081;
+        transform: rotate(45deg);
+        animation: floatHeart 4s infinite;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: #ff4081;
+        border-radius: 50%;
+      }
+
+      .heart::before {
+        left: -15px;
+      }
+
+      .heart::after {
+        top: -15px;
+      }
+
+      .message-box {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+        transform: scale(0);
+        animation: scaleIn 1s ease forwards;
+      }
+
+      .wish-button {
+        background: #ff4081;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+        margin: 10px;
+      }
+
+      .wish-button:hover {
+        transform: scale(1.1);
+      }
+
+      .memory-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .memory-box {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: rotateZ(random(-5, 5) deg);
+        transition: transform 0.3s;
+      }
+
+      .memory-box:hover {
+        transform: scale(1.05) rotateZ(0deg);
+      }
+
+      @keyframes floatHeart {
+        0%,
+        100% {
+          transform: rotate(45deg) translateY(0);
+        }
+        50% {
+          transform: rotate(45deg) translateY(-20px);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      .music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .surprise-box {
+        width: 100px;
+        height: 100px;
+        background: #ff69b4;
+        margin: 20px auto;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.3s;
+      }
+
+      .surprise-box:hover {
+        transform: scale(1.1);
+      }
+
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 1000;
+        animation: popIn 0.5s ease;
+      }
+
+      @keyframes popIn {
+        from {
+          transform: translate(-50%, -50%) scale(0);
+        }
+        to {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      /* Tambahan style untuk mobile */
+      @media (max-width: 768px) {
+        .title {
+          font-size: 2.5rem;
+          padding: 0 15px;
+        }
+
+        .message-box {
+          margin: 15px;
+          padding: 20px;
+        }
+
+        .wish-button {
+          padding: 12px 25px;
+          font-size: 1rem;
+        }
+
+        .heart {
+          width: 20px;
+          height: 20px;
+        }
+
+        .heart::before,
+        .heart::after {
+          width: 20px;
+          height: 20px;
+        }
+
+        .photo-memories {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          margin: 20px 15px;
+        }
+
+        .photo-card {
+          background: white;
+          padding: 10px;
+          border-radius: 15px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-card img {
+          width: 100%;
+          border-radius: 10px;
+          height: 200px;
+          object-fit: cover;
+        }
+
+        .friendship-quote {
+          font-style: italic;
+          color: #444;
+          margin: 15px 0;
+          font-size: 0.9rem;
+        }
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 100%;
+        margin: 20px auto;
+      }
+
+      .timeline-item {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.5s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .photo-memories {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .photo-card {
+        position: relative;
+        width: 100%;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .photo-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 75%; /* Aspect ratio 4:3 */
+        overflow: hidden;
+      }
+
+      .photo-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .photo-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .friendship-quote {
+        padding: 15px;
+        margin: 0;
+        font-style: italic;
+        color: #444;
+        font-size: 0.95rem;
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      /* Style untuk mobile */
+      @media (max-width: 768px) {
+        .photo-memories {
+          gap: 15px;
+          margin: 15px;
+        }
+
+        .photo-card {
+          margin-bottom: 15px;
+        }
+
+        .photo-wrapper {
+          padding-top: 100%; /* Aspect ratio 1:1 untuk mobile */
+        }
+
+        .friendship-quote {
+          padding: 12px;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* Tambahan style untuk gallery grid */
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .photo-grid {
+          grid-template-columns: 1fr;
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Happy Birthday Bestie! 🎉</h1>
+
+      <div class="heart-container">
+        <div class="heart"></div>
+      </div>
+
+      <div class="message-box">
+        <p>Untuk sahabat terbaikku...</p>
+        <button class="wish-button" onclick="showWishes()">
+          Tap untuk lihat pesan! 💝
+        </button>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Fotomu yang masih ku simpan 📸</h3>
+          <div class="photo-memories">
+            <div class="photo-card">
+              <div class="photo-wrapper">
+                <img src="edit.jpg" alt="Kenangan 1" loading="lazy" />
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="surprise-box" onclick="showSurprise()">🎁</div>
+
+      <div class="music-control">
+        <button class="wish-button" onclick="toggleMusic()">
+          🎵 Putar Lagu Kita
+        </button>
+      </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+      <source src="happy.mp3" type="audio/mp3" />
+    </audio>
+
+    <script>
+      // Membuat hearts yang mengambang
+      function createFloatingHearts() {
+        const container = document.querySelector(".heart-container");
+        for (let i = 0; i < 5; i++) {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.style.left = `${Math.random() * 100}%`;
+          heart.style.animationDelay = `${Math.random() * 2}s`;
+          container.appendChild(heart);
+        }
+      }
+
+      // Array ucapan manis
+      const wishes = [
+        "Selamat ulang tahun sahabat terbaikku! 🌟",
+        "Terima kasih sudah jadi sahabat terbaikku selama ini! 💕",
+        "Semoga semua mimpimu jadi kenyataan! 🌈",
+        "Kamu adalah sahabat terhebat yang pernah aku miliki! 👯‍♀️",
+        "Semoga persahabatan kita abadi selamanya! 🤝",
+        "Terimakasih untuk semua cerita dan tawa yang kita bagi! 😊",
+      ];
+
+      let wishIndex = 0;
+
+      function showWishes() {
+        const messageBox = document.querySelector(".message-box p");
+        messageBox.style.animation = "fadeIn 1s ease";
+        messageBox.textContent = wishes[wishIndex];
+        wishIndex = (wishIndex + 1) % wishes.length;
+      }
+
+      function showSurprise() {
+        const surprises = [
+          "Kamu tuh ya... sahabat paling kocak! 😆",
+          "Makasih udah selalu ada buat aku! 💖",
+          "Best friend forever! 👯‍♀️",
+          "Kita udah lewatin banyak hal bareng-bareng! 🤝",
+          "Semoga persahabatan kita langgeng terus! 🌟",
+        ];
+
+        const popup = document.createElement("div");
+        popup.className = "popup";
+        popup.innerHTML = `
+          <h2>Surprise Bestie! 🎉</h2>
+          <p>${surprises[Math.floor(Math.random() * surprises.length)]}</p>
+          <button class="wish-button" onclick="this.parentElement.remove()">Tutup</button>
+        `;
+        document.body.appendChild(popup);
+        popup.style.display = "block";
+        createConfetti();
+      }
+
+      function createConfetti() {
+        for (let i = 0; i < 50; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.position = "fixed";
+          confetti.style.width = "10px";
+          confetti.style.height = "10px";
+          confetti.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }deg, 100%, 50%)`;
+          confetti.style.left = `${Math.random() * 100}vw`;
+          confetti.style.top = "-10px";
+          confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+          document.body.appendChild(confetti);
+
+          setTimeout(() => confetti.remove(), 5000);
+        }
+      }
+
+      function toggleMusic() {
+        const music = document.getElementById("bgMusic");
+        const button = document.querySelector(".music-control button");
+        if (music.paused) {
+          music.play();
+          button.textContent = "🔇 Matikan Musik";
+        } else {
+          music.pause();
+          button.textContent = "🎵 Putar Musik";
+        }
+      }
+
+      // Inisialisasi
+      createFloatingHearts();
+    </script>
+  </body>
+</html>
