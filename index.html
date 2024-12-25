@@ -513,27 +513,45 @@
         wishIndex = (wishIndex + 1) % wishes.length;
       }
 
-      function showSurprise() {
-        const surprises = [
-          "Kamu tuh ya... sahabat paling kocak! 😆",
-          "Makasih udah selalu ada buat aku! 💖",
-          "Best friend forever! 👯‍♀️",
-          "Kita udah lewatin banyak hal bareng-bareng! 🤝",
-          "Semoga persahabatan kita langgeng terus! 🌟"
-        ];
+      let surpriseIndex = 0;
+      const surprises = [
+        "Alay dikit dulu, kamu tuh ya... sahabat paling kocak! 😆",
+        "makasih udah selalu ada buat aku! 💖",
+        "best friend forever! 👯‍♀️",
+        "kita udah lewatin banyak hal bareng-bareng! 🤝",
+        "semoga persahabatan kita langgeng terus! 🌟",
+        "dan maaf juga karena atas semua masalah yang pernah kita lalui"
+      ];
 
+      function showSurprise() {
         const popup = document.createElement('div');
         popup.className = 'popup';
         popup.innerHTML = `
           <h2>Surprise Bestie! 🎉</h2>
-          <p>${surprises[Math.floor(Math.random() * surprises.length)]}</p>
+          <p>${surprises[surpriseIndex]}</p>
+          <button class="wish-button" onclick="nextSurprise(this)">Next ➡️</button>
           <button class="wish-button" onclick="this.parentElement.remove()">Tutup</button>
         `;
         document.body.appendChild(popup);
         popup.style.display = 'block';
         
-        // Tambahkan efek confetti saat popup muncul
-        createConfetti();
+        if (surpriseIndex === 0) {
+          createConfetti();
+        }
+      }
+
+      function nextSurprise(button) {
+        surpriseIndex = (surpriseIndex + 1) % surprises.length;
+        const messageElement = button.parentElement.querySelector('p');
+        
+        // Animasi fade out
+        messageElement.style.animation = 'fadeOut 0.5s ease';
+        
+        setTimeout(() => {
+          messageElement.textContent = surprises[surpriseIndex];
+          // Animasi fade in
+          messageElement.style.animation = 'fadeIn 0.5s ease';
+        }, 500);
       }
 
       function createConfetti() {
