@@ -148,18 +148,99 @@
         z-index: 1000;
       }
 
-      .surprise-box {
-        width: 100px;
-        height: 100px;
-        background: #ff69b4;
-        margin: 20px auto;
-        cursor: pointer;
+      .gift-container {
         position: relative;
-        transition: transform 0.3s;
+        width: 120px;
+        height: 120px;
+        margin: 30px auto;
+        cursor: pointer;
+        perspective: 1000px;
       }
 
-      .surprise-box:hover {
-        transform: scale(1.1);
+      .gift-box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+      }
+
+      .gift-container:hover .gift-box {
+        transform: rotateY(180deg);
+      }
+
+      .gift-front, .gift-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+      }
+
+      .gift-front {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+
+      .gift-back {
+        background: linear-gradient(135deg, #ff8e8e, #ff6b6b);
+        transform: rotateY(180deg);
+      }
+
+      .gift-front::before {
+        content: '🎁';
+        font-size: 50px;
+      }
+
+      .gift-back::before {
+        content: '💝';
+        font-size: 50px;
+      }
+
+      .gift-box::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 100%;
+        background: rgba(255,255,255,0.2);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .gift-box::before {
+        content: '';
+        position: absolute;
+        height: 20px;
+        width: 100%;
+        background: rgba(255,255,255,0.2);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      /* Animasi untuk gift box */
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      .gift-container {
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      /* Responsif untuk mobile */
+      @media (max-width: 768px) {
+        .gift-container {
+          width: 100px;
+          height: 100px;
+        }
+
+        .gift-front::before,
+        .gift-back::before {
+          font-size: 40px;
+        }
       }
 
       .popup {
@@ -382,11 +463,16 @@
         </div>
       </div>
 
-      <div class="surprise-box" onclick="showSurprise()">🎁</div>
+      <div class="gift-container" onclick="showSurprise()">
+        <div class="gift-box">
+          <div class="gift-front"></div>
+          <div class="gift-back"></div>
+        </div>
+      </div>
 
       <div class="music-control">
         <button class="wish-button" onclick="toggleMusic()">
-          🎵 Putar Lagu Kita
+          🎵 Putar Lagu 
         </button>
       </div>
     </div>
@@ -433,35 +519,35 @@
           "Makasih udah selalu ada buat aku! 💖",
           "Best friend forever! 👯‍♀️",
           "Kita udah lewatin banyak hal bareng-bareng! 🤝",
-          "Semoga persahabatan kita langgeng terus! 🌟",
+          "Semoga persahabatan kita langgeng terus! 🌟"
         ];
 
-        const popup = document.createElement("div");
-        popup.className = "popup";
+        const popup = document.createElement('div');
+        popup.className = 'popup';
         popup.innerHTML = `
           <h2>Surprise Bestie! 🎉</h2>
           <p>${surprises[Math.floor(Math.random() * surprises.length)]}</p>
           <button class="wish-button" onclick="this.parentElement.remove()">Tutup</button>
         `;
         document.body.appendChild(popup);
-        popup.style.display = "block";
+        popup.style.display = 'block';
+        
+        // Tambahkan efek confetti saat popup muncul
         createConfetti();
       }
 
       function createConfetti() {
-        for (let i = 0; i < 50; i++) {
-          const confetti = document.createElement("div");
-          confetti.style.position = "fixed";
-          confetti.style.width = "10px";
-          confetti.style.height = "10px";
-          confetti.style.backgroundColor = `hsl(${
-            Math.random() * 360
-          }deg, 100%, 50%)`;
+        for(let i = 0; i < 50; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '10px';
+          confetti.style.height = '10px';
+          confetti.style.backgroundColor = `hsl(${Math.random() * 360}deg, 100%, 50%)`;
           confetti.style.left = `${Math.random() * 100}vw`;
-          confetti.style.top = "-10px";
+          confetti.style.top = '-10px';
           confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
           document.body.appendChild(confetti);
-
+          
           setTimeout(() => confetti.remove(), 5000);
         }
       }
